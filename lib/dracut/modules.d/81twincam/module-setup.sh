@@ -20,6 +20,7 @@ install() {
         inst /usr/bin/twincam
         # install libs
         inst_libdir_file "libcamera*.so*"
+        inst_libdir_file "libcamera/ipa_*.so*"
         inst_libdir_file "libevent*.so*"
         inst_libdir_file "libstdc++.so*"
 
