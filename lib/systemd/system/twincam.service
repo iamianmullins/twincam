@@ -1,8 +1,8 @@
 [Unit]
 Description=Show twincam
 DefaultDependencies=no
-Wants=systemd-ask-password-plymouth.path systemd-vconsole-setup.service
-After=systemd-vconsole-setup.service systemd-udev-trigger.service systemd-udevd.service
+Wants=systemd-ask-password-plymouth.path systemd-vconsole-setup.service dev-media.device dev-video.device
+After=systemd-vconsole-setup.service systemd-udev-trigger.service systemd-udevd.service dev-media.device dev-video.device
 Before=systemd-ask-password-plymouth.service
 ConditionKernelCommandLine=!plymouth.enable=0
 ConditionVirtualization=!container
