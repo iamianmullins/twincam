@@ -310,9 +310,10 @@ int AtomicRequest::commit(unsigned int flags) {
   if (flags & FlagAllowModeset)
     drmFlags |= DRM_MODE_ATOMIC_ALLOW_MODESET;
   if (flags & FlagAsync)
-    drmFlags |= DRM_MODE_PAGE_FLIP_EVENT | DRM_MODE_ATOMIC_NONBLOCK;
+      drmFlags = 0;
+  //  drmFlags |= DRM_MODE_PAGE_FLIP_EVENT | DRM_MODE_ATOMIC_NONBLOCK;
 
-  return drmModeAtomicCommit(dev_->fd(), request_, drmFlags, this);
+  return drmModeAtomicCommit(dev_->fd(), request_, drmFlags, 0);
 }
 
 Device::Device() : fd_(-1) {}
@@ -339,6 +340,20 @@ int Device::init() {
   if (fd_ < 0) {
     ret = -errno;
     eprintf("Failed to open DRM/KMS device %s: %s\n", name, strerror(-ret));
+    return ret;
+  }
+
+  ret = drmSetMaster(fd_);
+  if (ret < 0) {
+    ret = -errno;
+    eprintf("Failed to set master: %s\n", strerror(-ret));
+    return ret;
+  }
+
+  ret = drmSetClientCap(fd_, DRM_CLIENT_CAP_UNIVERSAL_PLANES, 1);
+  if (ret < 0) {
+    ret = -errno;
+    eprintf("Failed to enable universal planes capability: %s\n", strerror(-ret));
     return ret;
   }
 
