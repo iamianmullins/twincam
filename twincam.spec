@@ -6,7 +6,7 @@ Release:       4%{?dist}
 Summary:       A lightweight camera application
 
 License:       GPLv2
-URL:           https://github.com/ericcurtin/twincam
+URL:           https://github.com/iamianmullins/twincam
 Source0:       %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: meson
