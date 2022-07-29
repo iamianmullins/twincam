@@ -7,7 +7,7 @@ Summary:       A lightweight camera application
 
 License:       GPLv2
 URL:           https://github.com/iamianmullins/twincam
-Source0:       %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:       https://github.com/iamianmullins/twincam/archive/refs/tags/0.4.tar.gz
 
 BuildRequires: meson
 BuildRequires: gcc-c++
